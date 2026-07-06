@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0713再就业男团 - 首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><text x='0' y='20' font-size='22'>🎤</text></svg>") 12 12, auto;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background: url("img/bg.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: #111;
+            line-height: 1.75;
+        }
+        @keyframes pageFade {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+        }
+        nav {
+            width: 100%;
+            height: 70px;
+            background: #54CFB2;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 22px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover:not(.nav-home) {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+        .nav-home {
+            background: #ff9944;
+        }
+        .hero {
+            width: 100%;
+            height: 100vh;
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 90px;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-text1 {
+            font-size: 96px;
+            font-family: "STXingkai", "华文行楷", cursive;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: 12px;
+            background: linear-gradient(50deg, #ff2b36, #ffdd20, #33eeff, #bb33ff, #ff7733);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(255,255,255,0.45);
+        }
+        .hero-text2 {
+            font-size: 44px;
+            font-family: "STXingkai", "华文行楷", cursive;
+            color: #ffffff;
+            letter-spacing: 14px;
+            text-shadow: 0 3px 16px rgba(0,0,0,0.6);
+        }
+        .content-wrap {
+    background-color: rgba(255, 255, 255, 0.65);
+    background-blend-mode: lighten;
+    padding: 80px 0;
+}
+        section {
+    width: 92%;
+    max-width: 1280px;
+    margin: 100px auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+    background: rgba(255,255,255,0.6);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+}
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .title {
+            text-align: center;
+            font-size: 36px;
+            color:#54CFB2;
+            margin-bottom: 50px;
+            position: relative;
+            letter-spacing: 3px;
+        }
+        .title::after {
+            content: "";
+            width: 120px;
+            height: 4px;
+            background: #ff9944;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -12px;
+            border-radius: 3px;
+        }
+        
+        .group-wrap{
+    overflow: hidden;
+}
+.group-img {
+    width: 520px;
+    height: 340px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    transition: 0.4s;
+    background: #eee;
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+.group-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.group-text{
+    overflow: hidden;
+}
+.group-text{
+    overflow: hidden;
+}
+/* 下面是新加的缩进代码 */
+.group-text p {
+    text-indent: 2em;
+    line-height: 1.75;
+    margin: 0.7em 0;
+}
+.below-image-text p {
+    text-indent: 2em;
+    line-height: 1.75;
+    margin: 0.7em 0;
+}
+/* 之前新增的下方文本样式继续保留 */
+.below-image-text {
+    margin-top: 25px;
+    clear: left;
+    text-align: left;
+}
+.below-image-text p {
+    text-align: left;
+    text-indent: 2em;
+    margin: 0.7em 0;
+}
+.tag-box {
+    margin-top: 22px;
+    text-align: left;
+}
+
+@media (max-width: 1200px) {
+    .group-img {
+        float: none;
+        margin: 0 auto 20px auto;
+    }
+
+    .group-text {
+        width: 100%;
+        float: none;
+    }
+}
+        .group-img:hover {
+            transform: scale(1.03);
+        }
+        .group-img a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.group-img a:hover img {
+    transform: scale(1.03);
+    transition-duration: 0.3s;
+}
+        .group-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .group-text h3 {
+            font-size: 26px;
+            color: #54CFB2;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .tag {
+            display: inline-block;
+            background: #ffddbb;
+            color: #dd6622;
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 14px;
+            margin: 6px 5px;
+        }
+        .member-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 38px;
+            justify-content: center;
+        }
+        .member-card {
+            width: 335px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+        .member-card:hover {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 14px 32px rgba(34,102,187,0.22);
+            z-index: 10;
+        }
+        .card-pic {
+            width: 100%;
+            height: 290px;
+            overflow: hidden;
+            background:#eee;
+        }
+        .card-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .member-card:hover .card-pic img {
+            transform: scale(1.12);
+        }
+        .card-info {
+            padding: 22px;
+            text-align: center;
+        }
+        .card-info h4 {
+            font-size: 24px;
+            color: #54CFB2;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .card-info p {
+            color: #333;
+            font-size: 15px;
+        }
+        .album-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .album-card {
+            width: 260px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+            transition: 0.3s;
+        }
+        .album-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+        }
+        .album-img {
+            width: 100%;
+            height: 260px;
+            background:#eee;
+        }
+        .album-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .album-text {
+            padding: 18px;
+            text-align: center;
+        }
+        .top-btn {
+            position: fixed;
+            bottom: 45px;
+            right: 45px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #54CFB2;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            z-index: 998;
+            transition: 0.3s;
+        }
+        .top-btn:hover {
+            background: #ff9944;
+            transform: scale(1.12);
+        }
+        footer {
+    width: 100%;
+    height: 120px;
+    background: rgba(84, 207, 178, 0.85);
+    color: #ffffff;
+    text-align: center;
+    line-height: 120px;
+    margin-top: 130px;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+        /* ===================== 留言墙 三列多行向上滚动+单泡泡浮动 ===================== */
+        .wall-box {
+            margin-top: 60px;
+        }
+        .write-area {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        #msgInput {
+            width: 600px;
+            height: 80px;
+            padding: 12px 16px;
+            border: 2px solid #54CFB2;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            resize: none;
+        }
+        #sendBtn {
+            padding: 14px 36px;
+            background: #54CFB2;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            transition: 0.2s;
+        }
+        #sendBtn:hover {
+            background: #ff9944;
+        }
+        .barrage-wrap {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 16px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .barrage-track {
+            position: absolute;
+            width: 100%;
+            height: max-content;
+            top: 0;
+            left: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px 16px;
+            padding: 15px 10px;
+            animation: scrollUp 25s linear infinite;
+        }
+        .barrage-wrap:hover .barrage-track {
+            animation-play-state: paused;
+        }
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        .msg-bubble {
+            padding: 10px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            animation: floatBubble 3s ease-in-out infinite;
+        }
+        @keyframes floatBubble {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+        .msg-bubble:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+        /* 错开浮动动画，无规律上下飘 */
+        .msg-bubble:nth-child(odd) { animation-duration: 2.7s; animation-delay: 0s; }
+        .msg-bubble:nth-child(3n) { animation-duration: 3.3s; animation-delay: 0.25s; }
+        .msg-bubble:nth-child(4n) { animation-duration: 2.9s; animation-delay: 0.45s; }
+        .msg-bubble:nth-child(5n) { animation-duration: 3.6s; animation-delay: 0.65s; }
+
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .modal-inner {
+            width: 520px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 16px;
+        }
+        .modal-inner h4 {
+            font-size: 22px;
+            color: #54CFB2;
+            margin-bottom: 16px;
+        }
+        .modal-content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            word-break: break-all;
+        }
+        .close-modal {
+            width: 100%;
+            padding: 10px;
+            background: #54CFB2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .tip-text {
+            text-align: center;
+            color: #c83b3b;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        /* 成员卡片文字悬浮放大样式 */
+.member-card .card-info a h4,
+.member-card .card-info a p{
+    margin: 0;
+    transition: transform 0.3s ease;
+}
+.member-card .card-info a:hover h4,
+.member-card .card-info a:hover p{
+    transform: scale(1.04);
+}
+/* 修复card-pic图片底部留白 */
+.card-pic{
+    width: 100%;
+    height: 290px;
+    overflow: hidden;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+.card-pic img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    vertical-align: bottom;
+    transition: 0.5s;
+}
+/* 头像链接铺满图片区域 */
+.member-card .card-pic a{
+    display:block;
+    width:100%;
+    height:100%;
+}.album-img a{
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+@media (max-width: 1200px) {
+    .group-img {
+        float: none;
+        margin: 0 auto 20px auto;
+    }
+    .group-text {
+        width: 100%;
+        float: none;
+    }
+}
+.below-image-text {
+    margin-top: 25px;
+    clear: left;
+    text-align: left;
+}
+
+.below-image-text p {
+    text-align: left;
+    text-indent: 2em;
+    margin: 0.7em 0;
+}
+
+.tag-box {
+    margin-top: 22px;
+    text-align: left;
+}
+/* 图片+右侧三段布局 */
+.group-wrap{
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.group-img {
+    width: 520px;
+    height: 340px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    transition: 0.4s;
+    background: #eee;
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+.group-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.group-text{
+    overflow: hidden;
+}
+/* 右侧段落缩进 */
+.group-text p {
+    text-indent: 2em;
+    line-height: 1.75;
+    margin: 0.7em 0;
+}
+
+/* 图片下方文字，和图片左对齐 */
+.below-image-text {
+    clear: left;
+}
+.below-image-text p {
+    text-indent: 2em;
+    line-height: 1.75;
+    margin: 0.7em 0;
+}
+.tag-box {
+    margin-top: 22px;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-home">首页</a>
+        <a href="chenchu.html">陈楚生</a>
+        <a href="suxing.html">苏醒</a>
+        <a href="wangyue.html">王栎鑫</a>
+        <a href="zhangyuan.html">张远</a>
+        <a href="wangzhen.html">王铮亮</a>
+        <a href="luhu.html">陆虎</a>
+    </nav>
+
+    <div class="hero" id="heroBox">
+        <div class="hero-text1">至少今天很快乐</div>
+        <div class="hero-text2">0713再就业男团</div>
+    </div>
+
+    <div class="content-wrap">
+        <section id="group">
+    <h2 class="title">0713再就业男团 团体介绍</h2>
+
+    <div class="group-wrap">
+    <!-- 图片 -->
+    <div class="group-img">
+        <a href="https://www.bilibili.com/video/BV1nk1EBiEYY?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+            <img src="img/poster.jpg" alt="0713手绘海报">
+        </a>
+    </div>
+
+    <!-- 只保留图片右侧3段文字 -->
+    <div class="group-text">
+        <h3>十五年重聚，内娱最治愈再就业组合</h3>
+        <p>2007年，陈楚生、陆虎、苏醒、王栎鑫、王铮亮、张远等人因参加湖南卫视举办的首届“快乐男声”选秀比赛而进入大众视野，该比赛在决赛中的全国13强也被粉丝称为 “0713” 团体，6人均位列其中。</p>
+        <p>决赛之夜，陈楚生以331万张短信投票登顶冠军,但是拒绝在跨年晚会接收节目组的恶意安排，背负天价索赔；苏醒经历了雪藏以及解约，2014年才恢复自由身；王栎鑫作为演员的知名度远比歌手要高，但最红的角色只是网剧男二；张远当过偶像团体 “至上励合” 队长，可惜组合没落；陆虎依旧靠音乐谋生；王铮亮一直低调地做音乐，虽然上过春晚但还是歌红人不红的状态。</p>
+        <p>2019年，陈楚生、苏醒、王栎鑫、张远、陆虎五人以 “07快男” 身份参与录制《合唱吧！300》，并将微信群命名为 “再就业男团”。</p>
+    </div>
+</div>
+
+<!-- 2022往后全部内容移到group-wrap外面，和图片左边界对齐 -->
+<div class="below-image-text">
+    <p>2022年4月，六人重聚录制节目《欢迎来到蘑菇屋》并意外走红。随后推出自制团综《快乐再出发》第一季、第二季，豆瓣评分高达9.6，创下国产综艺口碑天花板。</p>
+    <p>7月5日，再就业男团的团综《快乐再出发》第一季播出，演唱主题曲《活该》并再次受到网友追捧。同年12月，再就业男团参与录制的《快乐再出发第二季》开播。</p>
+    <p>2024年2月9日，再就业男团首次合体参与《2024年中央广播电视总台春节联欢晚会》的录制，共同表演节目《像你这样的朋友》。</p>
+    <p>2025年1月28日，再就业男团在《2025年春节联欢晚会》演唱歌曲《登高》。10月25日，再就业男团首场《至少今天很快乐》演唱会在杭州奥体中心体育场（大莲花）举办。</p>
+    <p>六位成员各自拥有个人代表作与音乐奖项，兼具歌手、制作人、演员多重身份，兄弟之间纯粹真挚的感情收获大量观众喜爱。</p>
+    <div class="tag-box">
+        <span class="tag">2007快乐男声</span>
+        <span class="tag">快乐再出发</span>
+        <span class="tag">豆瓣9.6高分综艺</span>
+        <span class="tag">原创实力派男团</span>
+        <span class="tag">全国巡演</span>
+    </div>
+</div>
+</section>
+
+        <section id="member">
+            <h2 class="title">六位成员 个人舞台</h2>
+            <div class="member-container">
+    <!-- 1.陈楚生 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1tqEbzxEJu?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/chen.jpg" alt="陈楚生舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="chenchu.html" style="text-decoration:none;color:inherit;">
+                <h4>陈楚生</h4>
+                <p>音色怪物/吉他唱作</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 2.苏醒 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1K86uY1Eio?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/su.jpg" alt="苏醒舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="suxing.html" style="text-decoration:none;color:inherit;">
+                <h4>苏醒</h4>
+                <p>说唱开山人/词曲创作</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 3.王栎鑫 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1KkiueXE6V?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/wang1.jpg" alt="王栎鑫舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="wangyue.html" style="text-decoration:none;color:inherit;">
+                <h4>王栎鑫</h4>
+                <p>声压王者/唱演全能</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 4.张远 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1NjjC6uEAp?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/zhang.jpg" alt="张远舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="zhangyuan.html" style="text-decoration:none;color:inherit;">
+                <h4>张远</h4>
+                <p>碎活王者/唱跳俱佳</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 5.王铮亮 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1j8rPBCEhr?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/wang2.jpg" alt="王铮亮舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="wangzhen.html" style="text-decoration:none;color:inherit;">
+                <h4>王铮亮</h4>
+                <p>百万和声/键盘专家</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 6.陆虎 | 【头像a标签href内替换B站视频链接】 -->
+    <div class="member-card">
+        <div class="card-pic">
+            <a href="https://www.bilibili.com/video/BV1XSRzY5Eqn?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/lu.jpg" alt="陆虎舞台">
+            </a>
+        </div>
+        <div class="card-info">
+            <a href="luhu.html" style="text-decoration:none;color:inherit;">
+                <h4>陆虎</h4>
+                <p>OST作品神/实力唱作</p>
+            </a>
+        </div>
+    </div>
+</div>
+        </section>
+
+        <section id="honor">
+            <h2 class="title">音乐作品 & 综艺</h2>
+           <div class="album-wrap">
+    <!-- 第一张：活该，替换第一个href填入《活该》对应的视频链接 -->
+    <div class="album-card">
+        <div class="album-img">
+            <a href="https://www.bilibili.com/video/BV1Rr4y1776n?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/song1.jpg" alt="活该单曲封面">
+            </a>
+        </div>
+        <div class="album-text">
+            <h4>《活该》</h4>
+            <p>《快乐再出发》主题曲</p>
+        </div>
+    </div>
+
+    <!-- 第二张：快乐再出发综艺，替换第二个href粘贴综艺视频链接 -->
+    <div class="album-card">
+        <div class="album-img">
+            <a href="https://www.mgtv.com/h/457910.html" target="_blank">
+                <img src="img/song2.jpg" alt="综艺原声大碟">
+            </a>
+        </div>
+        <div class="album-text">
+            <h4>快乐再出发全集综艺</h4>
+            <p>全季综艺收录歌曲</p>
+        </div>
+    </div>
+
+    <!-- 第三张：至少今天很快乐，替换第三个href粘贴该曲目视频链接 -->
+    <div class="album-card">
+        <div class="album-img">
+            <a href="https://www.bilibili.com/video/BV1BZ421N7za?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="img/song3.jpg" alt="至少今天很快乐手绘封面">
+            </a>
+        </div>
+        <div class="album-text">
+            <h4>《至少今天很快乐》</h4>
+            <p>《至少今天很快乐》主题演唱会<br>快乐再出发综艺主题曲</p>
+        </div>
+    </div>
+</div>
+            <div style="margin-top:55px;background:rgba(255,255,255,0.6);padding:40px;border-radius:18px;box-shadow:0 1px 10px rgba(0,0,0,0.05);">
+                <h3 style="color:#54CFB2;margin-bottom:22px;font-size:24px;letter-spacing:2px;">团体重大荣誉</h3>
+                <ul style="padding-left:24px;line-height:2.1;font-size:15px;">
+                    <li>2019年，陈楚生、苏醒、王栎鑫、张远、陆虎五人以“07快男”身份参与录制《合唱吧！300》</li>
+                    <li>2022豆瓣年度最高分综艺《快乐再出发》评分9.6，年度综艺榜首</li>
+                    <li>微博视界大会年度最佳综艺作品、年度人气组合</li>
+                    <li>单曲《活该》入选年度十大影视金曲榜单</li>
+                    <li>12月31日，参加《东方卫视跨年晚会》的录制。</li>
+                    <li>年度最受欢迎音乐团体、年度综艺口碑组合</li>
+                    <li>2024年2月9日，再就业男团首次合体参与《2024年中央广播电视总台春节联欢晚会》的录制，共同表演节目《像你这样的朋友》</li>
+                    <li>2025年1月28日，再就业男团在《2025年春节联欢晚会》演唱歌曲《登高》。</li>
+                    <li>全国多城万人巡演，场场门票极速售罄</li>
+                    <li>多次登上卫视晚会、音乐盛典同台演唱</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 弹幕区域 三列多行向上滚动 -->
+        <section class="wall-box" id="msgWall">
+            <h2 class="title">粉丝留言弹幕墙</h2>
+            <p class="tip-text">收藏本网站后可发布留言，每一条祝福都会化作小泡泡留在墙上</p>
+
+            <div class="write-area">
+                <textarea id="msgInput" placeholder="写下你想对0713再就业男团说的话..."></textarea>
+                <button id="sendBtn">发布留言</button>
+            </div>
+
+            <div class="barrage-wrap">
+                <div class="barrage-track" id="trackBox"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="detail-modal" id="msgModal">
+        <div class="modal-inner">
+            <h4>留言详情</h4>
+            <div class="modal-content" id="modalText"></div>
+            <button class="close-modal" id="closeModalBtn">关闭</button>
+        </div>
+    </div>
+
+    <button class="top-btn">↑</button>
+    <footer>
+        Web前端开发实验作品 | 0713再就业男团主题网站
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll("section");
+        function scrollShow(){
+            sections.forEach(s=>{
+                const top = s.getBoundingClientRect().top;
+                if(top < window.innerHeight - 140) s.classList.add("show");
+            })
+        }
+        window.addEventListener("scroll",scrollShow);
+        window.onload = scrollShow;
+
+        const topBtn = document.querySelector(".top-btn");
+        window.addEventListener("scroll",()=>{
+            topBtn.style.display = window.scrollY>300 ? "block":"none";
+        })
+        topBtn.onclick = ()=>window.scrollTo({top:0,behavior:"smooth"});
+
+        // ===================== 留言墙JS 三列向上滚动+单泡泡浮动 =====================
+        const trackBox = document.getElementById('trackBox');
+        const msgInput = document.getElementById('msgInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const msgModal = document.getElementById('msgModal');
+        const modalText = document.getElementById('modalText');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        const colorList = [
+            'rgba(255,180,220,0.75)',
+            'rgba(180,220,255,0.75)',
+            'rgba(255,230,180,0.75)',
+            'rgba(200,255,210,0.75)',
+            'rgba(230,200,255,0.75)',
+            'rgba(255,255,180,0.75)',
+            'rgba(210,180,255,0.75)',
+            'rgba(180,255,230,0.75)'
+        ];
+
+        // 50条打底留言
+        const defaultMsgList = [
+            "0713永远不分家，友谊长存",
+            "十五年的重逢是最珍贵的缘分",
+            "陈楚生的吉他声治愈所有疲惫",
+            "苏醒的文字温柔又有力量",
+            "栎鑫高音一开口直接鸡皮疙瘩",
+            "张远的情歌藏满故事与温柔",
+            "王铮亮键盘一响氛围感拉满",
+            "陆虎全能编曲宝藏音乐人",
+            "《快乐再出发》刷无数遍依旧好哭",
+            "至少今天很快乐，岁岁都快乐",
+            "六个少年初心从未改变",
+            "没有剧本的综艺才最动人",
+            "巡演现场一定要奔赴一次",
+            "活该承载所有人的青春回忆",
+            "感谢六位治愈无数打工人",
+            "兄弟之间的默契无需多言",
+            "期待全员新综艺新单曲",
+            "合唱的时候永远热泪盈眶",
+            "平凡生活里的一束光是0713",
+            "愿六位永远自在放声歌唱",
+            "从07快男开始一路陪伴至今",
+            "纯粹真挚的友情格外难得",
+            "再就业男团热度始终滚烫",
+            "日常循环他们产出的歌曲",
+            "圈内难得这般深厚的六人友情",
+            "祝愿六人岁岁相逢同台演出",
+            "每场舞台的默契都格外动人",
+            "幸运可以遇见温暖的0713",
+            "他们的音乐与友情长久闪光",
+            "多年沉淀让舞台功底愈发扎实",
+            "0713成为我的日常精神慰藉",
+            "只要六人齐聚氛围感就足够好",
+            "期盼后续推出更多合唱原创曲",
+            "六位待人真诚，好感度拉满",
+            "未来长路希望他们并肩前行",
+            "张远711线下巡演一切顺利",
+            "栎鑫高音现场表现力极强",
+            "生哥原创词曲总是直击内心",
+            "醒哥说唱风格辨识度超高",
+            "亮哥键盘编排把控舞台基调",
+            "虎子产出了许多优质OST作品",
+            "蘑菇屋是大家美好的开端回忆",
+            "一定会奔赴至少今天很快乐巡演",
+            "很难再找到氛围如此融洽组合",
+            "真诚是0713最亮眼的特质",
+            "过往舞台回放反复观看不厌倦",
+            "这条留言墙装满粉丝满满热爱",
+            "每枚泡泡承载粉丝细碎祝愿",
+            "期待0713未来持续稳定出圈",
+            "往后漫长时光继续相伴同行"
+        ];
+
+        function getMsgList() {
+            let data = localStorage.getItem('msgWallData');
+            return data ? JSON.parse(data) : [...defaultMsgList];
+        }
+
+        function saveMsgList(list) {
+            localStorage.setItem('msgWallData', JSON.stringify(list));
+        }
+
+        function isPageStar() {
+            return localStorage.getItem('siteStar') === 'yes';
+        }
+
+        function createBubble(text) {
+            const bubble = document.createElement('div');
+            bubble.className = 'msg-bubble';
+            bubble.dataset.text = text;
+            const color = colorList[Math.floor(Math.random() * colorList.length)];
+            bubble.style.background = color;
+            bubble.textContent = text;
+            return bubble;
+        }
+
+        function renderBubbles() {
+            const list = getMsgList();
+            trackBox.innerHTML = '';
+            // 双倍复制实现无缝向上滚动
+            const loopList = [...list, ...list];
+            loopList.forEach(item => {
+                const bubble = createBubble(item);
+                trackBox.appendChild(bubble);
+            });
+            // 批量绑定点击弹窗
+            document.querySelectorAll('.msg-bubble').forEach(bub => {
+                bub.onclick = function () {
+                    modalText.innerText = this.dataset.text;
+                    msgModal.style.display = 'flex';
+                };
+            });
+        }
+
+        window.addEventListener('load', renderBubbles);
+
+        closeModalBtn.onclick = () => {
+            msgModal.style.display = 'none';
+        };
+
+        msgModal.onclick = (e) => {
+            if (e.target === msgModal) msgModal.style.display = 'none';
+        };
+
+        sendBtn.onclick = function () {
+            const text = msgInput.value.trim();
+            if (!text) {
+                alert('请输入留言内容！');
+                return;
+            }
+            if (!isPageStar()) {
+                alert('请先收藏本网站（Ctrl+D），收藏之后才可以发布留言！');
+                localStorage.setItem('siteStar', 'yes');
+                return;
+            }
+            const list = getMsgList();
+            list.push(text);
+            saveMsgList(list);
+            msgInput.value = '';
+            renderBubbles();
+            alert('留言发布成功，已添加至滚动弹幕墙！');
+        };
+    </script>
+</body>
+</html>

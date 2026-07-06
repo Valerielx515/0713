@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陆虎 - 个人详情</title>
+    <style>
+/* 全局基础 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+body {
+    cursor: none !important;
+}
+a,
+button,
+input,
+textarea,
+select,
+.carousel-btn,
+.carousel-btn:hover,
+.carousel-dots span,
+.carousel-dots span:hover,
+nav a,
+nav a:hover {
+    cursor: none !important;
+}
+html{
+    scroll-behavior: smooth;
+    font-family: "Microsoft Yahei", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    /* 第二张老虎舞台图设置成背景 */
+    background: url("images/tiger_stage_bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #111;
+    line-height: 1.75;
+}
+
+/* 跟随鼠标贴图，第一张厨师透明图 */
+.follow-cursor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    will-change: left, top;
+}
+.follow-cursor img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 导航渐变改为#00C73E至#34CCFF */
+nav {
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+nav a {
+    color: #006b30;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 7px 12px;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+nav a:hover {
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    color: #fff;
+    transform: scale(1.05);
+}
+nav a.active {
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    color: #fff;
+}
+
+/* 轮播容器 */
+.carousel-wrap{
+    width: 92%;
+    max-width: 1200px;
+    margin: 105px auto 30px auto;
+    background: rgba(255, 255, 255, 0.60);
+    backdrop-filter: blur(6px);
+    padding: 24px;
+    border-radius: 16px;
+}
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 3px solid #00C73E;
+    box-shadow: 0 4px 16px rgba(0, 199, 62, 0.22);
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-item {
+    flex: 0 0 100%;
+    overflow: hidden;
+}
+.carousel-item img {
+    width: 100%;
+    height: 680px;
+    object-fit: contain;
+    background-color: #000;
+    transition: transform 0.35s ease;
+}
+.carousel-item:hover img {
+    transform: scale(1.04);
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.70);
+    color: #00C73E;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    cursor: url("images/cook_cursor.png") 12 12, pointer !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    transition: all 0.2s;
+    z-index: 99;
+    padding: 0;
+}
+.carousel-btn:hover {
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    color: #fff;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+.carousel-dots span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #c9c9c9;
+    cursor: url("images/cook_cursor.png") 12 12, pointer !important;
+    transition: background 0.25s;
+}
+.carousel-dots span.active {
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+}
+@media (max-width:768px){
+  .carousel-item img { height: 320px; }
+  .carousel-btn { width: 38px; height: 38px; line-height: 38px; font-size: 20px; }
+}
+
+/* 通用区块 */
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 80px auto;
+}
+.block {
+    background: rgba(255, 255, 255, 0.75) !important;
+    border-radius: 16px;
+    padding: 35px 35px 50px 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+.block h2 {
+    color: #00C73E;
+    font-size: 26px;
+    margin-bottom: 20px;
+    border-left: 5px solid #00C73E;
+    padding-left: 12px;
+}
+.block h3 {
+    margin: 24px 0 10px;
+    color:#00C73E;
+    border-left:4px solid #00C73E;
+    padding-left:12px;
+    font-size:20px;
+}
+.tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    color: #fff;
+    padding: 5px 11px;
+    border-radius: 16px;
+    font-size: 13px;
+    margin: 5px 4px;
+}
+
+/* 经典单曲板块 四格换行画廊（保留原有白底，不改动） */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    margin-top: 20px;
+}
+.gallery-item {
+    width: calc((100% - 3 * 26px) / 4);
+    min-width: 200px;
+    height: 235px;
+    background: rgba(255,255,255,0.96);
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: 0.4s ease;
+}
+.gallery-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.gallery-item img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+.song-label {
+    margin: 5px 0 0;
+    text-align: center;
+    font-size: 15px;
+    color: #222;
+    transition: color 0.3s ease;
+}
+.song-label:hover { color: #00C73E; }
+.gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* ========== 重点修改：专辑封面和妆造神图板块 ========== */
+.gallery-photo-only {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 22px !important;
+    padding: 12px 6px 30px 6px !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item {
+    flex: 0 0 calc(25% - 16.5px) !important;
+    flex-shrink: 0 !important;
+    height: auto !important;
+    background: transparent !important; /* 去除白色底色 */
+    padding: 0 !important; /* 删除卡片内边距，框紧贴图片 */
+    border-radius: 22px !important;
+    box-shadow: none !important; /* 取消卡片阴影，干净无底板 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13) !important;
+}
+.gallery-photo-only .gallery-item .img-preview {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+.gallery-photo-only .gallery-item .img-preview img {
+    width: 100% !important;
+    height: auto !important; /* 图片高度自适应原图，图多大框多大 */
+    display: block !important; /* 消除图片底部白缝 */
+    border-radius: 16px !important;
+    transition: transform 0.3s ease;
+}
+.gallery-photo-only .gallery-item .img-preview:hover img {
+    transform: scale(1.02);
+}
+.gallery-photo-only .gallery-item .song-label {
+    margin-top: 12px !important; /* 缩小文字与图片间距 */
+    text-align: center;
+    font-size: 15.5px;
+    color: #222222;
+}
+
+/* 大图弹窗样式 */
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999999 !important;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.92);
+    pointer-events: auto !important;
+}
+.modal-img {
+    margin: 6vh auto 0;
+    display: block;
+    max-width: 92%;
+    max-height: 88vh;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    pointer-events: auto !important;
+}
+.modal-close:hover { color: #00C73E; }
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+}
+th,td{
+    border:1px solid #00C73E;
+    padding:12px;
+}
+thead tr{ background: linear-gradient(90deg, #00C73E, #34CCFF); color:#fff; }
+ol,ul{
+    padding-left: 24px;
+    line-height:2;
+}
+
+.back-home {
+    display: block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: linear-gradient(90deg, #00C73E, #34CCFF);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 22px;
+    margin: 60px auto;
+    transition: 0.3s;
+}
+.back-home:hover {
+    background: linear-gradient(90deg, #34CCFF, #00C73E);
+    transform: scale(1.05);
+}
+footer {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(0, 199, 62, 0.65), rgba(52, 204, 255, 0.65));
+    color: #00C73E;
+    text-align: center;
+    line-height: 100px;
+}
+    </style>
+</head>
+<body>
+    <!-- 跟随鼠标：第一张厨师透明抠图 -->
+    <div class="follow-cursor">
+        <img src="images/cook_cursor.png" alt="鼠标跟随贴图">
+    </div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="chenchu.html">陈楚生</a>
+        <a href="suxing.html">苏醒</a>
+        <a href="wangyue.html">王栎鑫</a>
+        <a href="zhangyuan.html">张远</a>
+        <a href="wangzhen.html">王铮亮</a>
+        <a href="luhu.html" class="active">陆虎</a>
+    </nav>
+
+    <!-- 经典合作舞台轮播，视频、图片链接清空预留 -->
+<!-- 经典合作舞台轮播，完成图片、B站链接填充 -->
+<div class="carousel-wrap">
+    <h2 style="color:#00C73E;margin-bottom:16px;border-left:5px solid #00C73E;padding-left:12px;font-size:26px;">经典合作舞台</h2>
+    <div class="carousel">
+        <div class="carousel-track">
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV14Sy1BQEUX?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage1_lanren.jpg" alt="烂人 杭州演唱会舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1p9k6BoEKu?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage2_congqian.jpg" alt="给从前的自己舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1LKMF6mEKy?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage3_xiake.jpg" alt="侠客行舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1as411E7mP?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage4_bendan.jpg" alt="笨蛋混蛋舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1he411A7Hp?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage4_yonggan.jpg" alt="别丢了你的勇敢舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1sp421o7Xg?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage5_pengyou.jpg" alt="像你这样的朋友春晚舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1A4MT67E3T?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage6_erduo.jpg" alt="把耳朵叫醒舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1yN4y1B7QU?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage7_qiguai.jpg" alt="世界奇奇怪怪你却可可爱爱舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1nnoRYTEBN?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage8_extra.jpg" alt="额外舞台储备">
+            </a>
+        </div>
+        <button class="carousel-btn prev">‹</button>
+        <button class="carousel-btn next">›</button>
+    </div>
+    <div class="carousel-dots"></div>
+</div>
+
+        <div class="block">
+    <h2>经典代表单曲</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1PXyaBVEWx?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single1_xueluoxia.jpg" alt="雪落下的声音">
+                <p class="song-label">雪落下的声音</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1EN411T7be?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single2_yueai.jpg" alt="越爱">
+                <p class="song-label">越爱</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1Jy4y1Z7Vb?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single3_xinglaibashaonian.jpg" alt="醒来吧少年">
+                <p class="song-label">醒来吧少年</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1TP41117Qy?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single4_henchedeyutian.jpg" alt="很扯的雨天">
+                <p class="song-label">很扯的雨天</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1kM1oBVE7N?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single5_laguogoude.jpg" alt="拉过勾的">
+                <p class="song-label">拉过勾的</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV15jL6zZECE?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single6_xiaomingtongxue.jpg" alt="小明同学">
+                <p class="song-label">小明同学</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1F5Lyz2E6R?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single7_shijiebunengmeini.jpg" alt="这个世界不能没有你">
+                <p class="song-label">这个世界不能没有你</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1ia4y137uV?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single8_kayueliangpashanglai.jpg" alt="看月亮爬上来">
+                <p class="song-label">看月亮爬上来</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <h2>陆虎完整个人荣誉汇总</h2>
+    <h3>板块一：专业音乐奖项&行业认可度</h3>
+    <ul>
+        <li>内地影视OST领域标杆级唱作人，常年担任诸多热门歌手御用词曲制作人，出道至今累计原创音乐作品突破200首，高产且质量稳定</li>
+        <li>代表作《雪落下的声音》在QQ音乐平台收藏量突破350万，出圈热度持久，收获多项影视原声类榜单前列名次</li>
+        <li>产出的配乐多次登陆《延禧攻略》《尚食》等高热度热播剧集，多次拿下影视OST相关榜单月度、季度榜单高位</li>
+        <li>创作风格适配多元题材，古风、流行、治愈风均可驾驭，业内合作邀约丰富，获得大量剧组以及同行音乐人认可</li>
+    </ul>
+
+    <h3>板块二：海量OST创作实绩</h3>
+    <h4>本人演唱出圈OST</h4>
+    <ul>
+        <li>《雪落下的声音》《鬓边不是海棠红》《拉过勾的》《像你这样的朋友》《我无畏奔向你》《炙热的你》《拾忆》《小尾巴》《石板路》等</li>
+    </ul>
+    <h4>为其他艺人词曲/制作的OST</h4>
+    <ul>
+        <li>为张碧晨打造《如故》、为张翰打造《拾忆》、为张杰打造《看月亮爬上来》、为白鹿打造《My sugar》、为周深打造《莽》，合作横跨多位头部歌手</li>
+        <li>产出配乐覆盖《延禧攻略》《尚食》《警察荣誉》《传家》《新京华烟云》《东北插班生》诸多热门影视剧，适配古装、现代多种剧集风格</li>
+    </ul>
+
+    <h3>板块三：原创个人单曲代表作</h3>
+    <ul>
+        <li>温情向：《给从前的自己》《爸爸妈妈去上班我去幼儿园》《内心世界》《小明同学》</li>
+        <li>轻快日常向：《很扯的雨天》《酱油》《就酱》《夏天的味道》《扫到一个好朋友》</li>
+        <li>氛围感创作：《越爱》《活该》《迷鸟》《世界奇奇怪怪你却可可爱爱》《这个世界不能没有你》</li>
+        <li>实体唱片成果：推出实体专辑《花吃泡面男》，线下巡演《扫到一个好朋友》口碑出众，线下场次上座率表现亮眼</li>
+    </ul>
+
+    <h3>板块四：出圈综艺与个人附加履历</h3>
+    <ul>
+        <li>常驻综艺口碑亮眼：《快乐再出发》豆瓣评分9.7、《欢迎来到蘑菇屋》豆瓣评分8.5、《闪亮的日子》豆瓣评分9.1，多档综艺收获高分口碑</li>
+        <li>陆续参与《我们的歌》《帐篷营业中》《恋爱到结婚的距离》《设计理想家》综艺录制，综艺感突出，搞笑暖心的性格收获大批路人好感</li>
+        <li>开设专属个人电台《虎吉撩聊》，拉近和粉丝的距离；除音乐创作之外涉足影视表演，拓展自身发展维度</li>
+        <li>巡演场次丰富，「反正都是我」巡演、像你这样的朋友系列巡演全国多城开演，现场唱功稳定，粉丝线下反响热烈</li>
+    </ul>
+</div>
+
+<!-- 专辑封面和妆造神图 横向画廊 弹窗大图 -->
+<div class="block">
+    <h2>专辑封面和妆造神图</h2>
+    <div class="gallery-photo-only">
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/album_pop_singer_full.png">
+                <img src="images/album_pop_singer_full.png" alt="流行歌手专辑封面">
+            </div>
+            <p class="song-label">《流行歌手》专辑封面</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/album_lanren_full.png">
+                <img src="images/album_lanren_full.png" alt="烂人专辑封面">
+            </div>
+            <p class="song-label">《烂人》专辑封面</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/stage_look_1_full.png">
+                <img src="images/stage_look_1_full.png" alt="玫瑰西装舞台妆造">
+            </div>
+            <p class="song-label">玫瑰礼服舞台造型</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/stage_look_2_full.png">
+                <img src="images/stage_look_2_full.png" alt="银白闪钻舞台妆造">
+            </div>
+            <p class="song-label">闪钻羽毛舞台造型</p>
+        </div>
+    </div>
+</div>
+
+<!-- 大图弹窗遮罩 -->
+<div class="img-modal" id="imgModal">
+    <span class="modal-close">×</span>
+    <img class="modal-img" id="modalImg" alt="大图预览">
+</div>
+
+<a href="index.html" class="back-home">← 返回首页</a>
+
+<footer>0713再就业男团 | 陆虎个人介绍页</footer>
+
+<script>
+// 轮播逻辑完全沿用原版
+const track = document.querySelector('.carousel-track');
+const slideItems = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const dotsWrap = document.querySelector('.carousel-dots');
+const slideTotal = slideItems.length;
+let curIndex = 0;
+const cloneList = Array.from(slideItems).map(item => item.cloneNode(true));
+cloneList.forEach(clone => track.appendChild(clone));
+const INTERVAL_TIME = 4000;
+for (let i = 0; i < slideTotal; i++) {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.index = i;
+    dotsWrap.appendChild(dot);
+}
+const dots = dotsWrap.querySelectorAll('span');
+function refreshCarousel() {
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(${-curIndex * 100}%)`;
+    let realIdx = curIndex % slideTotal;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === realIdx));
+}
+function slideNext() {
+    curIndex++;
+    refreshCarousel();
+    if (curIndex >= slideTotal) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = 0;
+            track.style.transform = `translateX(0)`;
+        }, 500);
+    }
+}
+function slidePrev() {
+    curIndex--;
+    refreshCarousel();
+    if (curIndex < 0) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = slideTotal - 1;
+            track.style.transform = `translateX(${-curIndex * 100}%)`;
+        }, 500);
+    }
+}
+nextBtn.addEventListener('click', slideNext);
+prevBtn.addEventListener('click', slidePrev);
+dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+        curIndex = Number(dot.dataset.index);
+        refreshCarousel();
+    });
+});
+let timer = setInterval(slideNext, INTERVAL_TIME);
+document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(timer));
+document.querySelector('.carousel').addEventListener('mouseleave', () => timer = setInterval(slideNext, INTERVAL_TIME));
+
+// 鼠标跟随绑定厨师透明贴图
+const followImg = document.querySelector('.follow-cursor');
+document.addEventListener('mousemove', (e) => {
+    followImg.style.left = `${e.clientX}px`;
+    followImg.style.top = `${e.clientY}px`;
+});
+
+// 弹窗完整逻辑：点图开启、叉号关闭、遮罩空白关闭、ESC键关闭，屏蔽alert报错
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".modal-close");
+const previewBoxs = document.querySelectorAll(".img-preview");
+
+previewBoxs.forEach(box => {
+  box.addEventListener("click", function (ev) {
+    ev.stopPropagation();
+    const bigSrc = this.dataset.src;
+    modal.style.display = "block";
+    modalImg.src = bigSrc;
+  });
+});
+
+function closeModal() {
+    modal.style.display = "none";
+    modalImg.src = "";
+}
+closeBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", function(e){
+    if(e.target === modal) closeModal();
+});
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && modal.style.display === "block") closeModal();
+});
+</script>
+</body>
+</html>

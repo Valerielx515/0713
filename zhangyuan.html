@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张远 - 个人详情</title>
+    <style>
+/* 全局基础 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+body {
+    cursor: none !important;
+}
+a,
+button,
+input,
+textarea,
+select,
+.carousel-btn,
+.carousel-btn:hover,
+.carousel-dots span,
+.carousel-dots span:hover,
+nav a,
+nav a:hover {
+    cursor: none !important;
+}
+html{
+    scroll-behavior: smooth;
+    font-family: "Microsoft Yahei", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: url("images/zhangyuan_stage_bg.png") no-repeat center center fixed;
+    background-size: cover;
+    color: #111;
+    line-height: 1.75;
+}
+
+/* 跟随鼠标贴图 */
+.follow-cursor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    will-change: left, top;
+}
+.follow-cursor img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 导航 */
+nav {
+    width: 100%;
+    height: 70px;
+    background: #FFED00;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+nav a {
+    color: #111;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 7px 12px;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+nav a:hover {
+    background: #FFF980;
+    transform: scale(1.05);
+}
+nav a.active {
+    background: #FFF980;
+}
+
+/* 轮播容器 */
+.carousel-wrap{
+    width: 92%;
+    max-width: 1200px;
+    margin: 105px auto 30px auto;
+    background: rgba(255, 255, 255, 0.60);
+    backdrop-filter: blur(6px);
+    padding: 24px;
+    border-radius: 16px;
+}
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 3px solid #FFED00;
+    box-shadow: 0 4px 16px rgba(255, 237, 0, 0.22);
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-item {
+    flex: 0 0 100%;
+    overflow: hidden;
+}
+.carousel-item img {
+    width: 100%;
+    height: 680px;
+    object-fit: contain;
+    background-color: #000;
+    transition: transform 0.35s ease;
+}
+.carousel-item:hover img {
+    transform: scale(1.04);
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.80);
+    color: #FFED00;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    cursor: url("images/zhangyuan_chef_cursor.png") 12 12, pointer !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    transition: all 0.2s;
+    z-index: 99;
+    padding: 0;
+}
+.carousel-btn:hover {
+    background-color: #FFF980;
+    color: #111;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+.carousel-dots span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #c9c9;
+    cursor: url("images/zhangyuan_chef_cursor.png") 12 12, pointer !important;
+    transition: background 0.25s;
+}
+.carousel-dots span.active {
+    background-color: #FFF980;
+}
+@media (max-width:768px){
+  .carousel-item img { height: 320px; }
+  .carousel-btn { width: 38px; height: 38px; line-height: 38px; font-size: 20px; }
+}
+
+/* 通用区块 */
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 80px auto;
+}
+.block {
+    background: rgba(255, 255, 255, 0.70) !important;
+    border-radius: 16px;
+    padding: 35px 35px 50px 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+.block h2 {
+    color: #FFED00;
+    font-size: 26px;
+    margin-bottom: 20px;
+    border-left: 5px solid #FFF980;
+    padding-left: 12px;
+}
+.block h3 {
+    margin: 24px 0 10px;
+    color:#FFED00;
+    border-left:4px solid #FFF980;
+    padding-left:12px;
+    font-size:20px;
+}
+.tag {
+    display: inline-block;
+    background: #FFF980;
+    color: #998200;
+    padding: 5px 11px;
+    border-radius: 16px;
+    font-size: 13px;
+    margin: 5px 4px;
+}
+
+/* 经典单曲板块 四格换行画廊（保持原有白底不动） */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    margin-top: 20px;
+}
+.gallery-item {
+    width: calc((100% - 3 * 26px) / 4);
+    min-width: 200px;
+    height: 235px;
+    background: rgba(255,255,255,0.70);
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: 0.4s ease;
+}
+.gallery-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.gallery-item img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+.song-label {
+    margin: 5px 0 0;
+    text-align: center;
+    font-size: 15px;
+    color: #222;
+    transition: color 0.3s ease;
+}
+.song-label:hover { color: #FFED00; }
+.gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 巡演海报及舞台妆造 横向画廊（统一陆虎样式：无白底、无边距、图片自适应） */
+.gallery-photo-only {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 22px !important;
+    padding: 12px 6px 30px 6px !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item {
+    flex: 0 0 calc(25% - 16.5px) !important;
+    flex-shrink: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13) !important;
+}
+.gallery-photo-only .gallery-item .img-preview {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+.gallery-photo-only .gallery-item .img-preview img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 16px !important;
+    transition: transform 0.3s ease;
+}
+.gallery-photo-only .gallery-item .img-preview:hover img {
+    transform: scale(1.02);
+}
+.gallery-photo-only .gallery-item .song-label {
+    margin-top: 12px !important;
+    text-align: center;
+    font-size: 15.5px;
+    color: #222222;
+}
+
+/* 大图弹窗样式 */
+.img-preview { cursor: pointer; }
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.70);
+}
+.modal-img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    margin-top: 30px;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.modal-close:hover { color: #FFED00; }
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+}
+th,td{
+    border:1px solid #e9dd60;
+    padding:12px;
+}
+thead tr{ background:#FFF980; }
+ol,ul{
+    padding-left: 24px;
+    line-height:2;
+}
+
+.back-home {
+    display: block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: #FFED00;
+    color: #111;
+    text-decoration: none;
+    border-radius: 22px;
+    margin: 60px auto;
+    transition: 0.3s;
+}
+.back-home:hover {
+    background: #FFF980;
+    transform: scale(1.05);
+}
+footer {
+    width: 100%;
+    height: 100px;
+    background: rgba(255, 237, 0, 0.75);
+    color: #111;
+    text-align: center;
+    line-height: 100px;
+}
+    </style>
+</head>
+<body>
+    <!-- 跟随鼠标贴图 -->
+    <div class="follow-cursor">
+    <img src="images/zhangyuan_chef_cursor.png" alt="鼠标跟随贴图">
+</div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="chenchu.html">陈楚生</a>
+        <a href="suxing.html">苏醒</a>
+        <a href="wangyue.html">王栎鑫</a>
+        <a href="zhangyuan.html" class="active">张远</a>
+        <a href="wangzhen.html">王铮亮</a>
+        <a href="luhu.html">陆虎</a>
+    </nav>
+
+    <!-- 经典合作舞台轮播 -->
+<div class="carousel-wrap">
+    <h2 style="color:#FFED00;margin-bottom:16px;border-left:5px solid #FFF980;padding-left:12px;font-size:26px;">经典合作舞台</h2>
+    <div class="carousel">
+        <div class="carousel-track">
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1o14y1r7Jp?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_ling.png" alt="舞台《伶》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1zH4y1U7rj?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_joker.png" alt="舞台《JOKER》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1734y1P7MH?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_wushu.png" alt="舞台《无数》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1uhnuz1EbC?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_huan.png" alt="舞台《唤》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV122HkzqEGA?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_mama.png" alt="舞台《MAMA》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV11Q4y1J7MQ?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_maitian.png" alt="舞台《麦田》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1NVTb6kEfJ?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_shihou.png" alt="舞台《时候》">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1Six1eKEXh?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+    <img src="images/stage_wukongzhuan.png" alt="舞台《悟空传（mix）》">
+</a>
+            <a class="carousel-item" href="https://www.bilibili.com/bangumi/play/ep1750654?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage_kanzhewo.png" alt="舞台《看着我的眼睛说》">
+            </a>
+        </div>
+        <button class="carousel-btn prev">‹</button>
+        <button class="carousel-btn next">›</button>
+    </div>
+    <div class="carousel-dots"></div>
+</div>
+
+  <div class="block">
+    <h2>经典代表单曲</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1tKoRY2EA2?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_haoren.png" alt="单曲舞台《好人》">
+                <p class="song-label">好人</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1ZSqcBtEZK?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_wohuideng.png" alt="单曲舞台《我会等》">
+                <p class="song-label">我会等</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1wHiEBmEZk?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_yueguangfeng.png" alt="单曲舞台《月光风》">
+                <p class="song-label">月光风</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1qei8BMEvN?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_onebyone.png" alt="单曲舞台《One by one》">
+                <p class="song-label">One by one</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1V27y6hEdM?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_shanwai.png" alt="单曲舞台《山外》">
+                <p class="song-label">山外</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1tTEc6AEBv?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_haihaoyounizai.png" alt="单曲舞台《还好有你在》">
+                <p class="song-label">还好有你在</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1EV7C6NE6Z?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_heng.png" alt="单曲舞台《哼》">
+                <p class="song-label">哼</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV12MYjzoEmL?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_youshengzhinian_solo.png" alt="单曲舞台《有生之年》独唱版">
+                <p class="song-label">有生之年</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <h2>张远完整个人荣誉汇总</h2>
+    <h3>板块一：早年校园履历与出道起点</h3>
+    <ul>
+        <li>求学经历：毕业于省属重点大学南京财经大学，在校就任校园流行乐团团长，在校斩获校园十佳歌手冠军、南京高校K歌风云榜亚军。</li>
+        <li>出道节点：2007拿下湖南卫视《快乐男声》南京赛区冠军，正式踏入乐坛开启职业音乐之路。</li>
+    </ul>
+
+    <h3>板块二：至上励合队长时期组合荣誉（2008—2016）</h3>
+    <p>2008年出任初代男团至上励合队长以及主唱，带领组合斩获大量华语主流榜单团体奖项：</p>
+    <ol>
+        <li>专辑发行：2008推出组合首张EP《降临》；后续陆续发布《齐天大圣》《Lucky Boys》《还好有你在》《4OUR MEN》多张正式EP与专辑。</li>
+        <li>历年团体奖项：多次拿下MusicRadio中国TOP排行榜多届内地最佳新晋组合、年度校园人气内地组合；斩获东方风云榜最佳舞台演绎奖、音乐风云榜新人盛典内地最佳新人组合、腾讯星光大典最佳乐队/组合；拿下9+2音乐先锋榜多轮先锋人气、跳舞组合奖项；收获百度娱乐沸点、劲歌王盛典年度人气组合荣誉；拿到亚洲热播音乐盛典内地最佳组合。</li>
+        <li>出圈组合单曲数据：代表作《棉花糖》斩获多届榜单内地年度金曲；《还好有你在》拿下MusicRadio年度金曲；EP曲目《鸭梨大》上线一个月网络点击突破1亿；单曲《恋爱666》首日网络点击率破亿；2014凭借原创作词拿下GISA广州十大金曲排行榜第三季度最佳作词奖项。</li>
+        <li>早期跨界成果：2014参与天津卫视综艺《国色天香》，反串京剧旦角，最终取得节目季军。</li>
+    </ol>
+
+    <h3>板块三：个人音乐赛道收获的奖项与爆款单曲实绩</h3>
+    <ol>
+        <li>标志性爆款《嘉宾》：入选腾讯音乐研究院2020种子金曲，年化播放量破亿；拿下新加坡第一音乐榜单U选1000的年度冠军，双平台收藏量突破4350万；衍生作品《可以不是你》入选过去三十年华语流行歌曲TOP1000。</li>
+        <li>近年平台官方荣誉：2023微博音乐盛典年度品质歌手、微博视界大会年度舞台演绎奖；2024微博音乐盛典年度金曲歌手；2025QQ音乐授予巅峰传唱力歌手称号。</li>
+        <li>出圈舞台单曲实绩：2019《创造营2019》初舞台《侥幸者》全网播放突破千万，口碑表现突出；2024参与《我们的歌》，合作舞台《悟空传》获评金曲巅峰夜荣耀金曲。</li>
+        <li>国际舞台认可：2025线下巡演舞美斩获MUSE铂金奖，舞美专业水准得到国际权威设计奖项认可。</li>
+    </ol>
+
+    <h3>板块四：影视剧OST产出实绩（统计周期2017至2026.05.17）</h3>
+    <ul>
+        <li>产出体量：截至最新统计，累计上线六十余首影视剧原声作品，覆盖古装、现代各类剧集，包揽片头曲、片尾曲、插曲、剧集主题曲多种定位。</li>
+        <li>传播亮点：代表性OST包括《凝眸》《山外》《寄信人长沙》等，不少曲目拿下QQ音乐、网易云、酷狗三端高位热度，《凝眸》单平台热度突破85万，《山外》酷狗热度突破60万，大量原声作品后续应用于线下巡演现场；长线榜单稳定性优异，多首单曲长时间停留在平台热度榜单当中。</li>
+    </ul>
+
+    <h3>板块五：综艺舞台以及线下巡演实绩</h3>
+    <ol>
+        <li>综艺公演：参加《披荆斩棘》系列综艺，公演舞台热度靠前，代表作《人间惊鸿客》拿下B站音乐分区榜单首位，话题讨论、二创产出热度突出，舞台表现收获官方认可。</li>
+        <li>巡演成果：顺利落地三巡多座城市场次，开启四巡远行ing系列巡演，布局海内外万人级别演出场馆，开票反响热烈，舞拿到国际奖项加持。</li>
+    </ol>
+
+    <h3>板块六：官方平台邀约、行业聘任以及跨界发展荣誉</h3>
+    <ol>
+        <li>央视舞台履历：2023亮相央视元宵晚会；2024先后登上大湾区新年音乐会、安徽卫视春晚、央视春晚、央视元宵晚会；2025再度受邀参加央视春节联欢晚会，多次登陆国家级主流晚会平台。</li>
+        <li>行业聘任资质：受聘安徽艺术学院校外流行演唱导师，同时担任中华古谱诗词传承创新研究中心校外合作艺术家，投身流行音乐教学以及传统古谱诗词音乐推广工作。</li>
+        <li>其余跨界布局：综艺、音乐双线稳步深耕，持续参与文旅宣传类活动，进行正向文旅推广，日常投身各类公益相关活动，大众口碑保持稳定向好。</li>
+    </ol>
+</div>
+
+<!-- 巡演海报及舞台神级妆造 -->
+<div class="block">
+    <h2>巡演海报及舞台神级妆造</h2>
+    <div class="gallery-photo-only">
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/tour_white.png">
+                <img src="images/tour_white.png" alt="WHITE巡演海报">
+            </div>
+            <p class="song-label">WHITE巡演</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/tour_yuanxing.png">
+                <img src="images/tour_yuanxing.png" alt="远行2026巡演海报">
+            </div>
+            <p class="song-label">远行2026巡演</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_glitter.png">
+                <img src="images/makeup_glitter.png" alt="闪钻氛围感妆造">
+            </div>
+            <p class="song-label">闪钻氛围感妆造</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_flower_crown.png">
+                <img src="images/makeup_flower_crown.png" alt="花冠古风妆造">
+            </div>
+            <p class="song-label">花冠古风妆造</p>
+        </div>
+    </div>
+</div>
+
+<!-- 大图弹窗遮罩 -->
+<div class="img-modal" id="imgModal">
+    <span class="modal-close">×</span>
+    <img class="modal-img" id="modalImg" src="" alt="大图预览">
+</div>
+
+<a href="index.html" class="back-home">← 返回首页</a>
+
+<footer>0713再就业男团 | 张远个人介绍页</footer>
+
+<script>
+// 轮播逻辑
+const track = document.querySelector('.carousel-track');
+const slideItems = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const dotsWrap = document.querySelector('.carousel-dots');
+const slideTotal = slideItems.length;
+let curIndex = 0;
+const cloneList = Array.from(slideItems).map(item => item.cloneNode(true));
+cloneList.forEach(clone => track.appendChild(clone));
+const INTERVAL_TIME = 4000;
+for (let i = 0; i < slideTotal; i++) {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.index = i;
+    dotsWrap.appendChild(dot);
+}
+const dots = dotsWrap.querySelectorAll('span');
+function refreshCarousel() {
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(${-curIndex * 100}%)`;
+    let realIdx = curIndex % slideTotal;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === realIdx));
+}
+function slideNext() {
+    curIndex++;
+    refreshCarousel();
+    if (curIndex >= slideTotal) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = 0;
+            track.style.transform = `translateX(0)`;
+        }, 500);
+    }
+}
+function slidePrev() {
+    curIndex--;
+    refreshCarousel();
+    if (curIndex < 0) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = slideTotal - 1;
+            track.style.transform = `translateX(${-curIndex * 100}%)`;
+        }, 500);
+    }
+}
+nextBtn.addEventListener('click', slideNext);
+prevBtn.addEventListener('click', slidePrev);
+dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+        curIndex = Number(dot.dataset.index);
+        refreshCarousel();
+    });
+});
+let timer = setInterval(slideNext, INTERVAL_TIME);
+document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(timer));
+document.querySelector('.carousel').addEventListener('mouseleave', () => timer = setInterval(slideNext, INTERVAL_TIME));
+
+// 鼠标跟随
+const followImg = document.querySelector('.follow-cursor');
+document.addEventListener('mousemove', (e) => {
+    followImg.style.left = `${e.clientX}px`;
+    followImg.style.top = `${e.clientY}px`;
+});
+
+// 大图弹窗（自动识别四张海报）
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".modal-close");
+const previewBoxs = document.querySelectorAll(".img-preview");
+previewBoxs.forEach(box => {
+    box.addEventListener("click", function(){
+        modal.style.display = "block";
+        modalImg.src = this.dataset.src;
+    })
+})
+closeBtn.addEventListener("click", function(){
+    modal.style.display = "none";
+})
+modal.addEventListener("click", function(e){
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+})
+</script>
+</body>
+</html>

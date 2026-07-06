@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王栎鑫 - 个人详情</title>
+    <style>
+       /* gallery外层容器，只保留一份规则 */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    margin-top: 20px;
+}
+/* 卡片本体样式，唯一一份 */
+.gallery-item {
+    width: calc((100% - 3 * 26px) / 4);
+    min-width: 200px;
+    background: rgba(255,255,255,0.65);
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: 0.4s ease;
+}
+.gallery-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+/* 图片自适应核心改动：contain完整适配所有长宽图片 */
+.gallery-item img {
+    width: 100%;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+.song-label {
+    margin: 5px 0 0;
+    text-align: center;
+    font-size: 15px;
+    color: #222;
+    transition: color 0.3s ease;
+}
+.song-label:hover {
+    color: #F3C62F;
+}
+.gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+body {
+    cursor: none !important;
+}
+/* 针对性高优先级屏蔽所有会出现小手的元素 */
+a,
+button,
+input,
+textarea,
+select,
+.carousel-btn,
+.carousel-btn:hover,
+.carousel-dots span,
+.carousel-dots span:hover,
+nav a,
+nav a:hover {
+    cursor: none !important;
+}
+
+html{
+    scroll-behavior: smooth;
+    font-family: "Microsoft Yahei", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: url("images/wangyuexin_stage_bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #111;
+    line-height: 1.75;
+}
+
+/* 跟随鼠标的厨师贴图样式 */
+.follow-cursor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-35%, -42%);
+    background: transparent;
+    will-change: left, top;
+}
+.follow-cursor img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+        /* 导航样式 */
+        nav {
+    width: 100%;
+    height: 70px;
+    background: #F3C62F;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 7px 12px;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #FFF2BC;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background: #FFF2BC;
+        }
+
+        /* 轮播外层居中容器 降低白膜透明度0.55 */
+       .carousel-wrap{
+    width: 92%;
+    max-width: 1200px;
+    margin: 105px auto 30px auto;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 24px;
+    border-radius: 16px;
+}
+
+        .carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 3px solid #F3C62F;
+    box-shadow: 0 4px 16px rgba(243, 198, 47, 0.22);
+}
+
+        .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+        .carousel-item {
+    flex: 0 0 100%;
+    overflow: hidden;
+}
+
+        .carousel-item img {
+    width: 100%;
+    height: 680px;
+    object-fit: contain;
+    background-color: #000;
+    transition: transform 0.35s ease;
+}
+
+        .carousel-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.95);
+    color: #F3C62F;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    cursor: url("images/chef.png") 12 12, pointer !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    transition: all 0.2s;
+    z-index: 99;
+    padding: 0;
+}
+
+        .carousel-btn:hover {
+    background-color: #FFF2BC;
+    color: #fff;
+}
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+        .carousel-dots span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #c9c9c9;
+    cursor: url("images/chef.png") 12 12, pointer !important;
+    transition: background 0.25s;
+}
+
+        .carousel-dots span.active {
+    background-color: #FFF2BC;
+}
+
+       @media (max-width:768px){
+  .carousel-item img {
+    height: 320px;
+  }
+.carousel-btn {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 20px;
+}
+}
+
+        .person-banner {
+            margin-top: 10px;
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .person-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .person-banner:hover img {
+            transform: scale(1.05);
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 80px auto;
+        }
+
+       .block {
+    background: rgba(255, 255, 255, 0.55) !important; /* 全局区块白膜降低透明度 */
+    border-radius: 16px;
+    padding: 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+        .block h2 {
+            color: #F3C62F;
+            font-size: 26px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FFF2BC;
+            padding-left: 12px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #FFF9D9;
+            color: #C89800;
+            padding: 5px 11px;
+            border-radius: 16px;
+            font-size: 13px;
+            margin: 5px 4px;
+}
+
+        .gallery-item {
+    width: calc((100% - 3 * 26px) / 4);
+    min-width: 200px;
+    height: 235px;
+    background: rgba(255,255,255,0.65);
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: 0.4s ease;
+}
+
+        .gallery-item img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+
+        .back-home {
+    display: block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: #F3C62F;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 22px;
+    margin: 60px auto;
+    transition: 0.3s;
+}
+
+        .back-home:hover {
+    background: #FFF2BC;
+    transform: scale(1.05);
+}
+
+        footer {
+    width: 100%;
+    height: 100px;
+    background: rgba(243, 198, 47, 0.65);
+    color: #fff;
+    text-align: center;
+    line-height: 100px;
+}
+
+/* 写真图库专属样式，统一无白底无边距（和张远页面一致） */
+.gallery-photo-only {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 22px !important;
+    padding: 12px 6px 30px 6px !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item{
+    flex: 0 0 calc(25% - 16.5px) !important;
+    flex-shrink: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13) !important;
+}
+.gallery-photo-only .gallery-item .img-preview {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+.gallery-photo-only .gallery-item .img-preview img{
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+    display: block;
+    margin: 0 auto;
+}
+.gallery-photo-only .gallery-item .img-preview:hover img {
+    transform: scale(1.02);
+}
+.gallery-photo-only .gallery-item .song-label {
+    margin-top: 12px !important;
+    text-align: center;
+    font-size: 15.5px;
+    color: #222222;
+}
+
+/* 跟随鼠标的厨师贴图 */
+.follow-cursor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    background: transparent;
+}
+
+.follow-cursor img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+/* 大图弹窗样式 */
+.img-preview {
+    cursor: pointer;
+}
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.modal-img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    margin-top: 30px;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.modal-close:hover {
+    color: #F3C62F;
+}
+    </style>
+</head>
+<body>
+    <div class="follow-cursor">
+    <img src="images/chef_cursor.png" alt="鼠标跟随贴图">
+</div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="chenchu.html">陈楚生</a>
+        <a href="suxing.html">苏醒</a>
+        <a href="wangyue.html" class="active">王栎鑫</a>
+        <a href="zhangyuan.html">张远</a>
+        <a href="wangzhen.html">王铮亮</a>
+        <a href="luhu.html">陆虎</a>
+    </nav>
+
+    <!-- 经典合作舞台轮播区域 -->
+  <div class="carousel-wrap">
+    <h2 style="color:#F3C62F;margin-bottom:16px;border-left:5px solid #FFF2BC;padding-left:12px;font-size:26px;">经典合作舞台</h2>
+    <div class="carousel">
+        <div class="carousel-track">
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV18QnMzGEaW?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage1_rjjhk.png" alt="合作舞台：人间惊鸿客">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1B94y157XE?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage2_dwsj.png" alt="合作舞台：动物世界">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1icsfekEAG?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage3_lfx.png" alt="合作舞台：历方乡">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/bangumi/play/ep836716?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage4_yb.png" alt="合作舞台：一半">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1ZnH6z2EXF?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage5_bs.png" alt="合作舞台：宝莲">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1pEsJzuEHM?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage6_wo.png" alt="合作舞台：我(Mandarin Version)">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1dQ4y1W7wU?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage7_sp.png" alt="合作舞台：水花主题舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1CK4SeTExk?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage8_wamjz.png" alt="合作舞台：晚安，敲门者">
+            </a>
+        </div>
+        <button class="carousel-btn prev">‹</button>
+        <button class="carousel-btn next">›</button>
+    </div>
+    <div class="carousel-dots"></div>
+</div>
+
+  <div class="block">
+    <h2>经典代表单曲</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1ykeUzmEoT?vd_source=8c623ad945f9ed91a1b387864a044ee2"  target="_blank">
+                <img src="images/solo1_dangerous.png" alt="王栎鑫单曲：Dangerous">
+                <p class="song-label">Dangerous</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1WG411Z7Es?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo2_bestus.png" alt="王栎鑫单曲：最好的我们">
+                <p class="song-label">最好的我们</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1yt421b7gT?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo3_treasure.png" alt="王栎鑫单曲：Treasure">
+                <p class="song-label">Treasure</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1V24y1S7XQ?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo4_jiuhao.png" alt="王栎鑫单曲：就好">
+                <p class="song-label">就好</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1zFxwzHEYr?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo5_friends.png" alt="王栎鑫单曲：没人能拆散我的好朋友">
+                <p class="song-label">没人能拆散我的好朋友</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1cQdyYGEmS?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo6_parachute.png" alt="王栎鑫单曲：降落伞">
+                <p class="song-label">降落伞</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1b2ADesEdg?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo7_skin.png" alt="王栎鑫单曲：吾栖之肤">
+                <p class="song-label">吾栖之肤</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1UZ5v6nEWJ?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/solo8_flowers.png" alt="王栎鑫单曲：Flowers">
+                <p class="song-label">Flowers</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <h2>王栎鑫完整个人实绩荣誉</h2>
+
+    <h3 style="margin: 18px 0 10px; color:#F3C62F; border-left:4px solid #FFF2BC; padding-left:12px; font-size:20px;">板块1：音乐个人奖项（歌手 & 创作方向）</h3>
+    <ol style="padding-left: 24px; line-height:2;">
+        <li>重磅奖项：斩获2008年首届蒙牛酸酸乳音乐风云榜新人盛典最佳新人歌曲奖；拿下年度雪碧中国原创音乐流行榜新锐势力榜单金曲奖、内地最受欢迎新人奖项；获评2009城市之音至尊年度听众最爱单曲、2014《男人风尚》年度影响力男歌手、2018全球华语金曲奖年度对唱歌曲。</li>
+        <li>歌手荣誉：出道以来多次拿下各大主流音乐榜单奖项，演唱风格适配抒情、说唱、唱跳多元曲风，海豚音、舞台唱演功底广受业内认可，多首单曲长期占据榜单前排。</li>
+        <li>创作荣誉：常年自主完成词曲、编曲创作，代表作涵盖《我是冠军》《天使听我唱歌》《我的青春我的根》等原创曲目，多年持续产出高质量原创单曲与专辑作品，创作周期横跨2007至2026年，创作产出稳定。</li>
+    </ol>
+
+    <h3 style="margin: 24px 0 10px; color:#F3C62F; border-left:4px solid #FFF2BC; padding-left:12px; font-size:20px;">板块2：单曲 & 专辑作品荣誉</h3>
+    <ol style="padding-left: 24px; line-height:2;">
+        <li>专辑产出：陆续发布《13》《天生一对》《暴走》《降落伞》《大不了就再遗憾》多张正式专辑，专辑内大量曲目由本人参与作词作曲，完成度很高。</li>
+        <li>热门单曲：出圈单曲包含《最好的我们》《Treasure》《What you did to me》《一个人》《就好》《月色歌》《偏要》《脆弱》等，多年热度持续在线；近年新作还有dangerous、flowers、好好的我不哭等优质作品。</li>
+        <li>影视OST与合作曲目：为诸多影视剧打造原声作品，代表OST有《寄信人长沙》等；合作合唱曲目包含好聚好散（feat.林采欣）、董事长（Feat.nono）等，同时产出《破茧（热血版）》《神啊救救我》诸多优质翻唱改编作品。</li>
+    </ol>
+
+    <h3 style="margin: 24px 0 10px; color:#F3C62F; border-left:4px solid #FFF2BC; padding-left:12px; font-size:20px;">板块3：披荆斩棘专项战绩</h3>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:12px; background:#fff; border-radius:10px; overflow:hidden;">
+        <thead>
+            <tr style="background:#FFF9D9;">
+                <th style="border:1px solid #f9e8a8; padding:12px;">战绩分类</th>
+                <th style="border:1px solid #f9e8a8; padding:12px;">详情介绍</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border:1px solid #f9e8a8; padding:12px; text-align:center;">披荆斩棘第三季舞台成果</td>
+                <td style="border:1px solid #f9e8a8; padding:12px;">公演依次带来《眉飞色舞》《调查中》《爱人错过》《逆战》《动物世界》，拿下五公个人喜爱度第一、总决赛除队长外排名第一，斩获整季个人喜爱度最高分、整季公演舞台最高分。</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f9e8a8; padding:12px; text-align:center;">披荆斩棘第五季舞台成果</td>
+                <td style="border:1px solid #f9e8a8; padding:12px;">公演产出《一人行》《姗姗》《宝莲》《人间惊鸿客》《送流水》舞台，四公拿到舞台排名第一；《人间惊鸿客》拿下B站热搜第一、B站音乐分区第一，全站榜单最高第三名，刷新节目历史数据。</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f9e8a8; padding:12px; text-align:center;">舞台传播数据</td>
+                <td style="border:1px solid #f9e8a8; padding:12px;">手握整季仅有的两场突破千万打投热度的舞台，《人间惊鸿客》B站播放量突破千万，多轮公演话题热度、短视频二创热度稳居前列。</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #f9e8a8; padding:12px; text-align:center;">节目官方荣誉</td>
+                <td style="border:1px solid #f9e8a8; padding:12px;">斩获重磅荣誉X-fire，多轮舞台拿下官方最佳唱跳、最佳舞台奖项，线下巡演口碑收获大量好评。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="margin: 24px 0 10px; color:#F3C62F; border-left:4px solid #FFF2BC; padding-left:12px; font-size:20px;">板块4：社会荣誉、公益与跨界影视成绩</h3>
+    <ol style="padding-left: 24px; line-height:2;">
+        <li>影视跨界实绩：影视领域双向发展，电视剧代表作涵盖《最好的我们》《黄金瞳》《鬼吹灯之牧野诡事》《小欢喜》《护卫者》《他其实没有那么爱你》《浮图缘》《小满生活》；参演电影包括《嘉年华》《再见路星河》《泡芙小姐》《卧鱼》《长沙夜生活》《少年班》，演技收获诸多好评。</li>
+        <li>体育公益：出任多项全民健身宣传大使，参与马拉松公益推广，借助自身号召力推进运动科普、体育公益活动落地。</li>
+        <li>文旅推广：多次参与各地文旅宣传片拍摄，担任青年文旅推介大使，助力本土文旅资源进行传播宣传。</li>
+        <li>环保与行业认可：投身野生动物保护、日常环保科普类公益活动；多次获评媒体评选年度全能艺人，综艺、音乐、影视三线稳步发展，大众口碑优异。</li>
+    </ol>
+</div>
+
+<div class="block">
+    <h2>舞台神级妆造</h2>
+    <div class="gallery gallery-photo-only">
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_1_orangehair.png">
+                <img src="images/makeup_1_orangehair.png" alt="橘发亮黄外套舞台妆造">
+            </div>
+            <p class="song-label">热烈橘发舞台造型</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_2_purpleveil.png">
+                <img src="images/makeup_2_purpleveil.png" alt="紫纱礼服精致妆造">
+            </div>
+            <p class="song-label">梦幻紫纱礼服造型</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_3_casualsofa.png">
+                <img src="images/makeup_3_casualsofa.png" alt="慵懒休闲日常妆造">
+            </div>
+            <p class="song-label">慵懒休闲私服造型</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/makeup_4_pajama.png">
+                <img src="images/makeup_4_pajama.png" alt="睡衣软萌舞台妆造">
+            </div>
+            <p class="song-label">软萌睡衣风造型</p>
+        </div>
+    </div>
+</div>
+
+<!-- 大图弹窗遮罩 -->
+<div class="img-modal" id="imgModal">
+    <span class="modal-close">×</span>
+    <img class="modal-img" id="modalImg" src="" alt="大图预览">
+</div>
+
+<a href="index.html" class="back-home">← 返回首页</a>
+
+<footer>0713再就业男团 | 王栎鑫个人介绍页</footer>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const slideItems = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const dotsWrap = document.querySelector('.carousel-dots');
+
+const slideTotal = slideItems.length;
+let curIndex = 0;
+
+const cloneList = Array.from(slideItems).map(item => item.cloneNode(true));
+cloneList.forEach(clone => track.appendChild(clone));
+
+const INTERVAL_TIME = 4000;
+
+for (let i = 0; i < slideTotal; i++) {
+    const dot = document.createElement('span');
+    if (i === 0) {
+        dot.classList.add('active');
+    }
+    dot.dataset.index = i;
+    dotsWrap.appendChild(dot);
+}
+const dots = dotsWrap.querySelectorAll('span');
+
+function refreshCarousel() {
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(${-curIndex * 100}%)`;
+
+    let realIdx = curIndex % slideTotal;
+    dots.forEach((d, idx) => {
+        d.classList.toggle('active', idx === realIdx);
+    });
+}
+
+function slideNext() {
+    curIndex++;
+    refreshCarousel();
+    if (curIndex >= slideTotal) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = 0;
+            track.style.transform = `translateX(0)`;
+        }, 500);
+    }
+}
+
+function slidePrev() {
+    curIndex--;
+    refreshCarousel();
+    if (curIndex < 0) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = slideTotal - 1;
+            track.style.transform = `translateX(${-curIndex * 100}%)`;
+        }, 500);
+    }
+}
+
+nextBtn.addEventListener('click', slideNext);
+prevBtn.addEventListener('click', slidePrev);
+
+dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+        curIndex = Number(dot.dataset.index);
+        refreshCarousel();
+    });
+});
+
+let timer = setInterval(slideNext, INTERVAL_TIME);
+
+document.querySelector('.carousel').addEventListener('mouseenter', () => {
+    clearInterval(timer);
+});
+document.querySelector('.carousel').addEventListener('mouseleave', () => {
+    timer = setInterval(slideNext, INTERVAL_TIME);
+});
+const followImg = document.querySelector('.follow-cursor');
+document.addEventListener('mousemove', (e) => {
+    followImg.style.left = `${e.clientX}px`;
+    followImg.style.top = `${e.clientY}px`;
+});
+
+document.addEventListener('mousemove', (e) => {
+    followImg.style.left = e.clientX + 'px';
+    followImg.style.top = e.clientY + 'px';
+});
+// 大图弹窗逻辑
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".modal-close");
+const previewBoxs = document.querySelectorAll(".img-preview");
+
+previewBoxs.forEach(box => {
+    box.addEventListener("click", function(){
+        modal.style.display = "block";
+        modalImg.src = this.dataset.src;
+    })
+})
+
+closeBtn.addEventListener("click", function(){
+    modal.style.display = "none";
+})
+
+modal.addEventListener("click", function(e){
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+})
+</script>
+</body>
+</html>

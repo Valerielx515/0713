@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王铮亮 - 个人详情</title>
+    <style>
+/* 全局基础 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none !important;
+}
+body {
+    cursor: none !important;
+}
+a,
+button,
+input,
+textarea,
+select,
+.carousel-btn,
+.carousel-btn:hover,
+.carousel-dots span,
+.carousel-dots span:hover,
+nav a,
+nav a:hover {
+    cursor: none !important;
+}
+html{
+    scroll-behavior: smooth;
+    font-family: "Microsoft Yahei", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: url("images/wangzhen_stage_bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #111;
+    line-height: 1.75;
+}
+
+/* 跟随鼠标贴图 */
+.follow-cursor {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    will-change: left, top;
+}
+.follow-cursor img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 导航 蓝白渐变替换原黄色 */
+nav {
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(90deg, #003892, #ffffff);
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+nav a {
+    color: #003892;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 7px 12px;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+nav a:hover {
+    background: linear-gradient(90deg, #003892, #ffffff);
+    color: #fff;
+    transform: scale(1.05);
+}
+nav a.active {
+    background: linear-gradient(90deg, #003892, #ffffff);
+    color: #fff;
+}
+
+/* 轮播容器 */
+.carousel-wrap{
+    width: 92%;
+    max-width: 1200px;
+    margin: 105px auto 30px auto;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(6px);
+    padding: 24px;
+    border-radius: 16px;
+}
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 3px solid #003892;
+    box-shadow: 0 4px 16px rgba(0, 56, 146, 0.22);
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-item {
+    flex: 0 0 100%;
+    overflow: hidden;
+}
+.carousel-item img {
+    width: 100%;
+    height: 680px;
+    object-fit: contain;
+    background-color: #000;
+    transition: transform 0.35s ease;
+}
+.carousel-item:hover img {
+    transform: scale(1.04);
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.95);
+    color: #003892;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    cursor: url("images/wangzhen_cursor.png") 12 12, pointer !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    transition: all 0.2s;
+    z-index: 99;
+    padding: 0;
+}
+.carousel-btn:hover {
+    background: linear-gradient(90deg, #003892, #ffffff);
+    color: #fff;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+.carousel-dots span {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #c9c9c9;
+    cursor: url("images/wangzhen_cursor.png") 12 12, pointer !important;
+    transition: background 0.25s;
+}
+.carousel-dots span.active {
+    background: linear-gradient(90deg, #003892, #ffffff);
+}
+@media (max-width:768px){
+  .carousel-item img { height: 320px; }
+  .carousel-btn { width: 38px; height: 38px; line-height: 38px; font-size: 20px; }
+}
+
+/* 通用区块 */
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 80px auto;
+}
+.block {
+    background: rgba(255, 255, 255, 0.75) !important;
+    border-radius: 16px;
+    padding: 35px 35px 50px 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+.block h2 {
+    color: #003892;
+    font-size: 26px;
+    margin-bottom: 20px;
+    border-left: 5px solid #003892;
+    padding-left: 12px;
+}
+.block h3 {
+    margin: 24px 0 10px;
+    color:#003892;
+    border-left:4px solid #003892;
+    padding-left:12px;
+    font-size:20px;
+}
+.tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #003892, #ffffff);
+    color: #fff;
+    padding: 5px 11px;
+    border-radius: 16px;
+    font-size: 13px;
+    margin: 5px 4px;
+}
+
+/* 经典单曲板块 四格换行画廊 */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    margin-top: 20px;
+}
+.gallery-item {
+    width: calc((100% - 3 * 26px) / 4);
+    min-width: 200px;
+    height: 235px;
+    background: rgba(255,255,255,0.96);
+    padding: 14px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: 0.4s ease;
+}
+.gallery-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.gallery-item img {
+    width: 100%;
+    height: 185px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+.song-label {
+    margin: 5px 0 0;
+    text-align: center;
+    font-size: 15px;
+    color: #222;
+    transition: color 0.3s ease;
+}
+.song-label:hover { color: #003892; }
+.gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 多彩小亮 横向不换行布局 */
+/* 多彩小亮 横向不换行布局 */
+.gallery-photo-only {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 22px !important;
+    padding: 12px 6px 30px 6px !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item {
+    flex: 0 0 calc(25% - 16.5px) !important;
+    flex-shrink: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
+.gallery-photo-only .gallery-item:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.13) !important;
+}
+.gallery-photo-only .gallery-item .img-preview {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    cursor: pointer;
+}
+.gallery-photo-only .gallery-item .img-preview img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 16px !important;
+    transition: transform 0.3s ease;
+}
+.gallery-photo-only .gallery-item .img-preview:hover img {
+    transform: scale(1.02);
+}
+.gallery-photo-only .gallery-item .song-label {
+    margin-top: 12px !important;
+    text-align: center;
+    font-size: 15.5px;
+    color: #222222;
+}
+
+/* 大图弹窗样式 修复层级、点击 */
+.img-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999999 !important;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.70);
+    pointer-events: auto !important;
+}
+.modal-img {
+    margin: 6vh auto 0;
+    display: block;
+    max-width: 92%;
+    max-height: 88vh;
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    pointer-events: auto !important;
+}
+.modal-close:hover { color: #003892; }
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+}
+th,td{
+    border:1px solid #003892;
+    padding:12px;
+}
+thead tr{ background: linear-gradient(90deg, #003892, #ffffff); color:#fff; }
+ol,ul{
+    padding-left: 24px;
+    line-height:2;
+}
+
+.back-home {
+    display: block;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: linear-gradient(90deg, #003892, #ffffff);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 22px;
+    margin: 60px auto;
+    transition: 0.3s;
+}
+.back-home:hover {
+    background: linear-gradient(90deg, #ffffff, #003892);
+    transform: scale(1.05);
+}
+footer {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(0, 56, 146, 0.65), rgba(255,255,255,0.65));
+    color: #003892;
+    text-align: center;
+    line-height: 100px;
+}
+    </style>
+</head>
+<body>
+    <!-- 跟随鼠标贴图 -->
+    <div class="follow-cursor">
+        <img src="images/wangzhen_cursor.png" alt="鼠标跟随贴图">
+    </div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="chenchu.html">陈楚生</a>
+        <a href="suxing.html">苏醒</a>
+        <a href="wangyue.html">王栎鑫</a>
+        <a href="zhangyuan.html">张远</a>
+        <a href="wangzhen.html" class="active">王铮亮</a>
+        <a href="luhu.html">陆虎</a>
+    </nav>
+
+    <!-- 经典合作舞台轮播 -->
+<div class="carousel-wrap">
+    <h2 style="color:#003892;margin-bottom:16px;border-left:5px solid #003892;padding-left:12px;font-size:26px;">经典合作舞台</h2>
+    <div class="carousel">
+        <div class="carousel-track">
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1uz421q75G?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage1.png" alt="抱紧比你富有的国王，失去比你落魄的乞丐">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV13m2bY4Ewf?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage2.png" alt="守候舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1rT42167Go?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage3.png" alt="呓语舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV12wy8BzEED?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage4.png" alt="半边山半边海演唱会">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/bangumi/play/ep4307187?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage5.png" alt="爱河合作舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1LFsfeLErx?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage6.png" alt="寓寓舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/video/BV1yEyUYcETW?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage7.png" alt="想着你舞台">
+            </a>
+            <a class="carousel-item" href="https://www.bilibili.com/bangumi/play/ep4405300?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/stage8.png" alt="小半合作舞台">
+            </a>
+        </div>
+        <button class="carousel-btn prev">‹</button>
+        <button class="carousel-btn next">›</button>
+    </div>
+    <div class="carousel-dots"></div>
+</div>
+
+    <div class="block">
+    <h2>经典代表单曲</h2>
+    <div class="gallery">
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1VKTx6SEZV?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_1.png" alt="战旗向党旗报告">
+                <p class="song-label">战旗向党旗报告</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1TPjr6zEzi?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_2.png" alt="月亮照山川">
+                <p class="song-label">月亮照山川</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/bangumi/play/ep2638947?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_3.png" alt="不凡2024">
+                <p class="song-label">不凡2024</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1dV1TBdEFj?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_4.png" alt="星夜">
+                <p class="song-label">星夜</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1LSXDBiEtW?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_5.png" alt="凡心">
+                <p class="song-label">凡心</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1FP411T78D?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_6.png" alt="下单记忆">
+                <p class="song-label">下单记忆</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV1Y1421k7X4?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_7.png" alt="但我正在想你">
+                <p class="song-label">但我正在想你</p>
+            </a>
+        </div>
+        <div class="gallery-item">
+            <a href="https://www.bilibili.com/video/BV11cf6YrEsa?vd_source=8c623ad945f9ed91a1b387864a044ee2" target="_blank">
+                <img src="images/single_8.png" alt="时间都去哪儿了">
+                <p class="song-label">时间都去哪儿了</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <h2>王铮亮完整个人荣誉汇总</h2>
+    <h3>板块一：专业音乐奖项</h3>
+    <h4>1. 热门单曲专项大奖</h4>
+    <p>《时间都去哪儿了》</p>
+    <ul>
+        <li>第十四届音乐风云榜年度最佳影视歌曲</li>
+        <li>第11届MusicRadio中国TOP排行榜点播冠军奖</li>
+        <li>第十三届国家精神文明建设“五个一工程”优秀作品奖</li>
+        <li>第二届青春的选择盛典年度神曲大奖</li>
+        <li>第二届光荣绽放十大中文金曲奖</li>
+        <li>第十届劲歌王·金曲金榜至尊金曲奖</li>
+        <li>首届QQ音乐盛典年度歌曲金曲奖</li>
+        <li>第八届、第九届中国移动无线音乐盛典十大金曲奖</li>
+        <li>第十届中国金唱片奖综艺类最佳音乐制作人奖</li>
+    </ul>
+    <p>其余代表作获奖</p>
+    <ul>
+        <li>《满满》：第17届东方风云榜年度最佳对唱歌曲奖、第18届中国歌曲排行榜年度金曲奖</li>
+        <li>《家的方向》：中国歌曲TOP排行榜最佳作曲奖</li>
+        <li>《最远的距离》：第14届全球华语歌曲排行榜年度二十大金曲</li>
+    </ul>
+
+    <h4>2. 个人综合音乐荣誉</h4>
+    <ol>
+        <li>专业赛事：1995波罗的海国际手风琴比赛青年组金奖、2005年“全国PUB歌手比赛”全国冠军</li>
+        <li>新人奖项：第17届东方风云榜最佳新人奖、第9届中国原创音乐流行榜最佳新人奖</li>
+        <li>年度音乐人荣誉：新浪娱乐15周年杰出青年勋章、2023微博文化之夜年度文化音乐人、2023微博音乐盛典年度品质歌手、2024微博音乐盛典年度瞩目歌手、2024腾讯娱乐白皮书年度综艺音乐人、2025QQ音乐超级巅峰之夜巅峰品质歌手</li>
+        <li>行业榜单荣誉：第11届中国原创音乐流行榜飞跃表现奖、第10届劲歌王金曲金榜全能艺人、第14届全球华语歌曲排行榜北京地区杰出歌手、第14届全球华语歌曲排行榜最佳舞台演绎男歌手、杭州国际音乐产业博览会“最受欢迎男歌手”、2024搜狐时尚盛典年度男歌手</li>
+        <li>传媒&创作类奖项：金号2012盛典最受媒体关注奖、第24届东方风云榜音乐盛典传媒推荐创作歌手奖</li>
+        <li>公益音乐荣誉：第4届绝对影响力慈善盛典最具影响力慈善明星奖、中国慈善榜发布盛典第12届慈善榜样</li>
+    </ol>
+
+    <h3>板块二：音乐创作与专业能力成就</h3>
+    <ol>
+        <li>音乐作品产出：拥有《不凡》《半边山半边海》《凡心》《星夜》《一生一阕歌》等大量出圈代表作；发行《满满的爱》《爱的自选》《听得到的时间》《故事岛》《不假思索》《慢人理论》多张个人专辑</li>
+        <li>影视OST能力：累计创作100+影视原声，担任《那年青春我们正好》《将夜》《前任攻略》《末代厨娘》等多部影视剧音乐总监，包揽作词、作曲、编曲、制作全流程</li>
+        <li>乐器功底：精通手风琴（国际赛事金奖）、钢琴、键盘、口风琴、卡祖笛、架子鼓，熟练掌握全系列键盘类乐器</li>
+        <li>业内合作：合作艺人包含刘德华、张靓颖、谭维维等；合作音乐人有方文山、文薇等一线词曲、演奏艺术家</li>
+    </ol>
+
+    <h3>板块三：综艺、晚会与跨界舞台实绩</h3>
+    <h4>1. 央视官方晚会履历</h4>
+    <ul>
+        <li>4次登上央视春晚舞台（2014/2015/2021/2024）</li>
+        <li>央视元宵晚会、中秋晚会、端午晚会、总台新年音乐会等多档国家级晚会常驻表演嘉宾</li>
+    </ul>
+    <h4>2. 综艺代表作</h4>
+    <ul>
+        <li>音综：《经典咏流传》《诗画中国》《披荆斩棘4》《时光音乐会》《声生不息》</li>
+        <li>文化综艺：《国家宝藏》《澳门双行线》</li>
+        <li>生活综艺：《快乐老友记》</li>
+    </ul>
+    <h4>3. 音乐剧领域</h4>
+    <ul>
+        <li>参演/创作音乐剧：《莎士比亚的爱情密码》《阿尔兹记忆的爱情》《当爱已成往事》</li>
+    </ul>
+
+    <h3>板块四：个人特长与趣味出圈标签</h3>
+    <ol>
+        <li>业余竞技特长：Tennis123网球分级业余赛事总冠军、成都市跳舞机冠军、CS成都职业战队副队长、街机游戏世界第三</li>
+        <li>个人特色标签：谐音梗达人、全网公认烂梗王；音乐学院副教授；幽默出圈性格，圈内人缘极佳，与林依轮等艺人私交深厚</li>
+    </ol>
+
+    <h3>板块五：公益与正向音乐产出</h3>
+    <ul>
+        <li>长期参与慈善公益项目，获评年度慈善榜样、影响力慈善明星</li>
+        <li>创作正能量主旋律作品《战旗向党旗报告》，登上官方晚会舞台，传递正向价值观</li>
+        <li>多次参与文旅宣传类音乐项目，以音乐助力地方文旅发展</li>
+    </ul>
+</div>
+
+<!-- 多彩小亮 横向画廊 弹窗大图 -->
+<div class="block">
+    <h2>多彩小亮</h2>
+    <div class="gallery-photo-only">
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/tennis_full.png">
+                <img src="images/tennis_thumb.png" alt="网球小亮">
+            </div>
+            <p class="song-label">网球小亮</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/accordion_full.png">
+                <img src="images/accordion_thumb.png" alt="手风琴小亮">
+            </div>
+            <p class="song-label">手风琴小亮</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/pink_suit_full.png">
+                <img src="images/pink_suit_thumb.png" alt="小熊猫小亮">
+            </div>
+            <p class="song-label">小熊猫小亮</p>
+        </div>
+        <div class="gallery-item">
+            <div class="img-preview" data-src="images/piano_brown_full.png">
+                <img src="images/piano_brown_thumb.png" alt="钢琴小亮">
+            </div>
+            <p class="song-label">钢琴小亮</p>
+        </div>
+    </div>
+</div>
+
+<!-- 大图弹窗遮罩 -->
+<div class="img-modal" id="imgModal">
+    <span class="modal-close">×</span>
+    <img class="modal-img" id="modalImg" alt="大图预览">
+</div>
+
+<a href="index.html" class="back-home">← 返回首页</a>
+
+<footer>0713再就业男团 | 王铮亮个人介绍页</footer>
+
+<script>
+// 轮播逻辑
+const track = document.querySelector('.carousel-track');
+const slideItems = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const dotsWrap = document.querySelector('.carousel-dots');
+const slideTotal = slideItems.length;
+let curIndex = 0;
+const cloneList = Array.from(slideItems).map(item => item.cloneNode(true));
+cloneList.forEach(clone => track.appendChild(clone));
+const INTERVAL_TIME = 4000;
+for (let i = 0; i < slideTotal; i++) {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.index = i;
+    dotsWrap.appendChild(dot);
+}
+const dots = dotsWrap.querySelectorAll('span');
+function refreshCarousel() {
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(${-curIndex * 100}%)`;
+    let realIdx = curIndex % slideTotal;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === realIdx));
+}
+function slideNext() {
+    curIndex++;
+    refreshCarousel();
+    if (curIndex >= slideTotal) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = 0;
+            track.style.transform = `translateX(0)`;
+        }, 500);
+    }
+}
+function slidePrev() {
+    curIndex--;
+    refreshCarousel();
+    if (curIndex < 0) {
+        setTimeout(() => {
+            track.style.transition = 'none';
+            curIndex = slideTotal - 1;
+            track.style.transform = `translateX(${-curIndex * 100}%)`;
+        }, 500);
+    }
+}
+nextBtn.addEventListener('click', slideNext);
+prevBtn.addEventListener('click', slidePrev);
+dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+        curIndex = Number(dot.dataset.index);
+        refreshCarousel();
+    });
+});
+let timer = setInterval(slideNext, INTERVAL_TIME);
+document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(timer));
+document.querySelector('.carousel').addEventListener('mouseleave', () => timer = setInterval(slideNext, INTERVAL_TIME));
+
+// 鼠标跟随
+const followImg = document.querySelector('.follow-cursor');
+document.addEventListener('mousemove', (e) => {
+    followImg.style.left = `${e.clientX}px`;
+    followImg.style.top = `${e.clientY}px`;
+});
+
+// 弹窗完整逻辑：点图片打开、点×关闭、点黑色遮罩关闭、ESC键关闭
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".modal-close");
+const previewBoxs = document.querySelectorAll(".img-preview");
+
+// 打开大图（移除alert报错弹窗）
+previewBoxs.forEach(box => {
+  box.addEventListener("click", function (ev) {
+    ev.stopPropagation();
+    const bigSrc = this.dataset.src;
+    modal.style.display = "block";
+    modalImg.src = bigSrc;
+    // 删掉onerror弹窗提示，不会再弹出文件不存在提示
+  });
+});
+
+// 关闭弹窗函数
+function closeModal() {
+    modal.style.display = "none";
+    modalImg.src = "";
+}
+// 点击叉号关闭
+closeBtn.addEventListener("click", closeModal);
+// 点击黑色背景关闭
+modal.addEventListener("click", function(e){
+    if(e.target === modal) closeModal();
+});
+// 键盘ESC一键关闭
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && modal.style.display === "block") closeModal();
+});
+</script>
+</body>
+</html>
